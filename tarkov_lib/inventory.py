@@ -3,7 +3,8 @@ import time
 import mouse
 from python_imagesearch.imagesearch import imagesearcharea, imagesearch
 
-from tarkov.inventory_bot_config import InventoryBotConfig
+from tarkov_lib.inventory_bot_config import InventoryBotConfig
+from tarkov_lib.item import Item
 
 
 class NotFoundException(Exception):
@@ -14,7 +15,7 @@ class Inventory:
     def __init__(self, config: InventoryBotConfig):
         self.cfg = config
 
-    def find_item_position(self, item_icon):
+    def find_item_position(self, item_icon) -> Item:
         icon_path = f"./{self.cfg.icons_directory}/{item_icon}"
 
         if self.cfg.multi_monitors_support:
@@ -26,12 +27,14 @@ class Inventory:
             time.sleep(self.cfg.lag_secs)
             raise NotFoundException
 
-        return pos[0] + 5, pos[1] + 5  # +5px - so the game will detect the item, not the edge which is not clickable
+        return Item(position=(pos[0] + 5, pos[1] + 5))  # +5px - so the game will detect the item, not the edge which is not clickable
 
-    def find_any_by_icons_list(self, icons_list: list) -> tuple:
+    def find_any_by_icons_list(self, icons_list: list) -> Item:
         for icon in icons_list:
             try:
-                return self.find_item_position(item_icon=icon)
+                # TODO: Podwójna weryfikacja tu
+                item = self.find_item_position(item_icon=icon)
+                return item
             except NotFoundException:
                 continue
 

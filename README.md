@@ -12,4 +12,4 @@ This pice of software will automaticly use medic items in Tarkov, it is usefull 
 
 ```pipenv shell```
 
-```python main.py```
+```python apps/healing_bot.py```
