@@ -2,22 +2,17 @@ import time
 
 import mouse
 
+from tarkov_lib.icons import load_icons
 from tarkov_lib.inventory import Inventory, NotFoundException
-from tarkov_lib.inventory_bot_config import InventoryBotConfig
 
 if __name__ == '__main__':
-    cfg = InventoryBotConfig(
-        icons_directory="../icons/meds",
-        multi_monitors_support=True,
-        resolution=(1920, 1080)
-    )
 
-    inventory = Inventory(cfg)
+    inventory = Inventory(multi_monitors_support=True)
     time.sleep(3)
 
     while True:
         try:
-            healing_item = inventory.find_any_by_icons_list(cfg.icons)
+            healing_item = inventory.find_any_by_icons_list(load_icons("../icons/meds"))
         except NotFoundException:
             continue
 
