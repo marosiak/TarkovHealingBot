@@ -5,4 +5,4 @@ class Item:
         self.position = position
 
     def __str__(self):
-        return f"Item at screen position: self.position"
+        return f"Item at screen position: {self.position}"
