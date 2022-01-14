@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 mouse = "*"
+python-imagesearch = {git = "https://github.com/marosiak/python-imagesearch"}
 
 [dev-packages]
 

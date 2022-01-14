@@ -1,9 +1,5 @@
 import os
 
-class IconsProvider:
-    def __init__(self):
-        pass
-
 
 def load_icons(icons_directory) -> list:
     icons = []
